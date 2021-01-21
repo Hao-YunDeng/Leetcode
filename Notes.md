@@ -68,3 +68,26 @@ class Tuple implements Comparable<Tuple> {
     }
 }
 ```
+### 解法三：binary search
+思路：while lo<hi, 左侧含mid，cnt保证lo hi之间必有想要矩阵元，当lo=hi时返回，while内部：cnt<k时说明全左含mid都不够，lo=mid+1；否则说明含mid是够的，hi=mid，注意不减一
+```java
+class Solution {
+    public int kthSmallest(int[][] matrix, int k) {
+    int m = matrix.length, n = matrix[0].length;
+    int lo = matrix[0][0], hi = matrix[m - 1][n - 1] + 20;
+    while (lo < hi) {
+        int mid = lo + (hi - lo) / 2;
+        int cnt = 0;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n && matrix[i][j] <= mid; j++) {
+                cnt++;
+            }
+        }
+        if (cnt < k) lo = mid + 1;
+        else hi = mid;
+    }
+    return lo;
+        
+    }
+}
+```
