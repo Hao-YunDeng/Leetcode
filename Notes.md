@@ -5,7 +5,7 @@
 ### 解法一：PriorityQueue with tuple class and comparator
 思路：利用PriorityQueue自动返回最小的功能，首先将矩阵第一行（或第一列）元素放入，返回最小者，然后放入最小者的后面一个，重复k次即可
 
-时间复杂度：
+时间复杂度：minHeap(early stop adding) O(min(K,N)+K∗logN)
 
 空间复杂度：
 
@@ -72,6 +72,8 @@ class Tuple implements Comparable<Tuple> {
 ```
 ### 解法三：binary search
 思路：while lo<hi, 左侧含mid，cnt保证lo hi之间必有想要矩阵元，当lo=hi时返回，while内部：cnt<k时说明全左含mid都不够，lo=mid+1；否则说明含mid是够的，hi=mid，注意不减一
+
+复杂度：N*log(max-min)
 ```java
 class Solution {
     public int kthSmallest(int[][] matrix, int k) {
