@@ -9,11 +9,13 @@
 
 空间复杂度：
 
+备注：注意PriorityQueue 的三种constructor: [GeekforGeeks PriorityQueue with comparator](https://www.geeksforgeeks.org/implement-priorityqueue-comparator-java/)
+
 ```java
 class Solution {
     public int kthSmallest(int[][] matrix, int k) {
      int m = matrix.length, n = matrix[0].length;
-        PriorityQueue<Tuple> pq = new PriorityQueue<Tuple>(1, new tupleComaprator());
+        PriorityQueue<Tuple> pq = new PriorityQueue<Tuple>(1, new tupleComaprator());//1 is the initial size; cannot be 0
         for(int j = 0; j < n; j++) pq.offer(new Tuple(0, j, matrix[0][j]));
         for(int i = 0; i < k - 1; i++) { 
             Tuple t = pq.poll();
@@ -35,6 +37,34 @@ class Solution {
         public int compare(Tuple t1, Tuple t2) {
             return t1.val - t2.val;
         }
+    }
+}
+```
+### 解法二：PriorityQueue with tuple comparable
+思路：同上，注意比较，这里用的comparable
+
+```java
+public int kthSmallest(int[][] matrix, int k) {
+    int m = matrix.length, n = matrix[0].length;
+    PriorityQueue<Tuple> pq = new PriorityQueue<Tuple>();
+    for(int j = 0; j < n; j++) pq.offer(new Tuple(0, j, matrix[0][j]));
+    for(int i = 0; i < k - 1; i++) { // 小根堆，去掉 k - 1 个堆顶元素，此时堆顶元素就是第 k 的数
+        Tuple t = pq.poll();
+        if(t.x == m - 1) continue;
+        pq.offer(new Tuple(t.x + 1, t.y, matrix[t.x + 1][t.y]));
+    }
+    return pq.poll().val;
+}
+
+class Tuple implements Comparable<Tuple> {
+    int x, y, val;
+    public Tuple(int x, int y, int val) {
+        this.x = x; this.y = y; this.val = val;
+    }
+
+    @Override
+    public int compareTo(Tuple that) {
+        return this.val - that.val;
     }
 }
 ```
