@@ -10,8 +10,9 @@
 空间复杂度：
 
 备注：
--注意PriorityQueue 的三种constructor: [GeekforGeeks PriorityQueue with comparator](https://www.geeksforgeeks.org/implement-priorityqueue-comparator-java/)
--注意比较comparable and comparator [Comparable and Comparator] (https://www.javatpoint.com/difference-between-comparable-and-comparator)
+ - 注意PriorityQueue 的三种constructor: [GeekforGeeks PriorityQueue with comparator](https://www.geeksforgeeks.org/implement-priorityqueue-comparator-java/)
+
+ - 注意比较comparable and comparator [Comparable and Comparator] (https://www.javatpoint.com/difference-between-comparable-and-comparator)
 ```java
 class Solution {
     public int kthSmallest(int[][] matrix, int k) {
