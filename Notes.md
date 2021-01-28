@@ -95,5 +95,6 @@ class Solution {
     }
 }
 ```
-## 645. Set Mismatch: array本应存储1 ~ n，但是有一个数missing，有一个数duplicated，找出两者，数组返回
+## 645. Set Mismatch
+题目描述：array本应存储1 ~ n，但是有一个数missing，有一个数duplicated，找出两者，数组返回
 ### 解法一：
