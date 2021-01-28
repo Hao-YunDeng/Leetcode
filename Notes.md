@@ -97,4 +97,31 @@ class Solution {
 ```
 ## 645. Set Mismatch
 题目描述：array本应存储1 ~ n，但是有一个数missing，有一个数duplicated，找出两者，数组返回
-### 解法一：
+### 解法一：排序之后扫描一次，发现array[i-1]==array[i]即duplicated，发现array[i-1]<a[i]+1,则array[i-1]+1即missing。时间复杂度为NlogN，排序空间复杂度logN
+
+### 解法二：HashMap，先扫一遍计数，计数 = .getOrDefault(i, 0)+1，然后再扫一遍HashMap，如果containsKey再判断是否为2，否则不containsKey就是missing。时空均为N 。同样的，也可以用array计数。
+``` java
+class Solution {
+    public int[] findErrorNums(int[] nums) {
+        int dup = -1, missing = -1;
+        Map<Integer, Integer> map = new HashMap<>();
+        for(int i = 0; i < nums.length; i++) {
+            map.put(nums[i], map.getOrDefault(nums[i], 0) + 1);
+        }
+        for(int i = 1; i <= nums.length; i++) {
+            if(map.containsKey(i)) {
+                if(map.get(i) == 2) {
+                    dup = i;
+                }
+            }
+            else {
+                missing = i;
+            }
+        }
+        return new int[] {dup, missing};
+    }
+}
+```
+    
+
+
