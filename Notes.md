@@ -125,5 +125,8 @@ class Solution {
 }
 ```
     
+### 解法三：Negative Mark
+思路：把数组中数-1当index，翻转数组中这个index的数，翻转之前检查是否曾经被翻转过（注意使用Math.abs()），如果是，不要再次翻转了，这个index曾经出现过，所以duplicated数就是此index + 1。这样一次循环结束后本应所有index上的数都被翻过恰好一次，除了从未出现的index，所以再扫一遍，未翻转过的数所在index从未出现过，missing = index + 1
+
 
 
