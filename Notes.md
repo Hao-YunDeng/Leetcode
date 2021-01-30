@@ -156,3 +156,18 @@ class Solution {
 题目描述：将整数1~n重排为这样，相邻两数的差值只有k个不同的数，k<n.
 解法：重排为1, 2, 3, ..., n-k-1, n-k; n, n-k+1, n-1, n-k+2, ..., n-k+1+[(k-1)/2], n-k+1+[k/2]
 验证：差为1, 1, 1, ..., 1, 1（共n-k-1个）; k, k-1, k-2, k-3, ..., 1(共k个)  
+```java
+class Solution {
+    public int[] constructArray(int n, int k) {
+        int[] ans = new int[n];
+        int c = 0;
+        for(int i = 1; i <= n - k; i++) {
+            ans[c++] = i;
+        }
+        for(int i = 0; i < k; i++) {
+            ans[c++] = (i % 2 == 0) ? n - i / 2 : n - k + (i + 1) / 2;
+        }
+        return ans;
+    }
+}
+```
