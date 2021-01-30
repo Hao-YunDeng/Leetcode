@@ -171,3 +171,34 @@ class Solution {
     }
 }
 ```
+
+## 697: Degree of an Array
+degree of this array is defined as the maximum frequency of any one of its elements. Your task is to find the smallest possible length of a (contiguous) subarray of nums, that has the same degree as nums
+就是直接扫几遍
+```java
+class Solution {
+    public int findShortestSubArray(int[] nums) {
+        Map<Integer, Integer> firstOcc = new HashMap<>();
+        Map<Integer, Integer> lastOcc = new HashMap<>();
+        Map<Integer, Integer> count = new HashMap<>();
+        for(int i = 0; i < nums.length; i++) {
+            if(!firstOcc.containsKey(nums[i])) {
+                firstOcc.put(nums[i], i);
+            }
+            lastOcc.put(nums[i], i);
+            count.put(nums[i], count.getOrDefault(nums[i], 0) + 1);
+        }
+        
+        int max = Collections.max(count.values());
+        
+        int ans = nums.length;
+        
+        for(int i : count.keySet()) {
+            if(count.get(i) == max) {
+                ans = Math.min(ans, lastOcc.get(i) - firstOcc.get(i) + 1);
+            }
+        }
+        return ans;
+    }
+}
+```
