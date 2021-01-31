@@ -202,3 +202,25 @@ class Solution {
     }
 }
 ```
+## 565. Array Nesting
+详见Excel，写的很清楚了，贴在这里主要学习一下  
+1. 虽看起来两重循环嵌套实际只一层  
+2. 传递值的新写法
+```java
+class Solution {
+    public int arrayNesting(int[] nums) {
+        int max = 0;
+        for(int i = 0; i < nums.length; i++) {
+            int count = 0;
+            for(int j = i; nums[j] != -1; ) {
+                int t = nums[j];                                               
+                nums[j] = -1;
+                j = t;
+                count++;
+            }
+            max = Math.max(max, count);               
+        }
+        return max;
+    }
+}
+```
