@@ -211,6 +211,7 @@ class Solution {
     public int arrayNesting(int[] nums) {
         int max = 0;
         for(int i = 0; i < nums.length; i++) {
+            //这里并不需要if 非 -1 的条件，因为下一层只有非 -1 才做事 
             int count = 0;
             for(int j = i; nums[j] != -1; ) {
                 int t = nums[j];                                               
