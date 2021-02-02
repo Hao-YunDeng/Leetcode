@@ -268,3 +268,18 @@ class Solution {
     }
 }
 ```
+### 151. Reverse Words in a String
+Given an input string s, reverse the order of the words.
+#### 本题需学习regular expression，split方法，以及trim函数
+```java
+class Solution {
+    public String reverseWords(String s) {
+        String[] words = s.split("\\s+");
+        StringBuilder sb = new StringBuilder();
+        for(int i = words.length - 1; i >=0; i--) {
+            sb.append(words[i] + " ");
+        }
+        return sb.toString().trim();
+    }
+}
+```
