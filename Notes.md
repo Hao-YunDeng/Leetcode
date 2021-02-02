@@ -248,3 +248,23 @@ class Solution {
     }
 }
 ```
+#### 解法二就简单了：仔细想想，转k次之后长啥样？只不过是最后k个元素跑到前面，前面的n-k个元素顺延而已啊！要想in place实现，还需更进一步意识到，这种两大块交换顺序其实可以分解为，先整体全部反序，然后分别把前k个和后n-k个分别内部翻回来就行了。
+```java
+class Solution {
+    public void rotate(int[] nums, int k) {
+        k = k % nums.length;
+        reverse(nums, 0, nums.length - 1);
+        reverse(nums, 0, k - 1);
+        reverse(nums, k ,nums.length - 1);
+    }
+    public void reverse(int[] nums, int start, int end) {
+        while(start < end) {
+            int temp = nums[start];
+            nums[start] = nums[end];
+            nums[end] = temp;
+            start++;
+            end--;
+        }
+    }
+}
+```
