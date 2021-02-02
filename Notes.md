@@ -283,3 +283,17 @@ class Solution {
     }
 }
 ```
+### 242. Valid Anagram
+题目要求就是判断一个string是否是另一个string的重排。算法很简单，就是排序后再比较。难点在于string，char array的函数
+```java
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        if(s.length() != t.length()) return false;
+        char[] a = s.toCharArray();
+        char[] b = t.toCharArray();
+        Arrays.sort(a);
+        Arrays.sort(b);
+        return Arrays.equals(a, b);
+    }
+}
+```
