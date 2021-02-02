@@ -225,3 +225,26 @@ class Solution {
     }
 }
 ```
+### 189. Rotate Array
+每个数顺延k位，用ON O1 做到。其实不好做，注意复习。
+#### 解法一：每转一个就转到底，额外counter记录次数，挨个拿起来转，但是counter够了就退出。难点在写法。
+```java
+class Solution {
+    public void rotate(int[] nums, int k) {
+        k = k % nums.length;
+        int count = 0;
+        for(int i = 0; count < nums.length; i++) {
+            int currIdx = i;
+            int prevNum = nums[currIdx];
+            do {
+                int nextIdx = (currIdx + k) % nums.length;
+                int tempNum = nums[nextIdx];
+                nums[nextIdx] = prevNum;
+                prevNum = tempNum;
+                currIdx = nextIdx;
+                count++;
+            } while(i != currIdx);
+        }
+    }
+}
+```
