@@ -297,3 +297,45 @@ class Solution {
     }
 }
 ```
+### 409. Longest Palindrome
+给定纯字母字符串，用其中的字母写成回文串，最长多长？  
+细想很简单：每个字母有多少对，就能写进回文串当中(count / 2 * 2)，其中还能多添加一个在正中间，巧妙之处在这里：能添加的字母个数必为奇，(if count % 2 == 1)，且只能添加一次 (&& length % 2 == 0)
+```java
+class Solution {
+    public int longestPalindrome(String s) {
+        int[] count = new int[123];
+        for(char c : s.toCharArray()) {
+            count[c]++;
+        }
+        int ans = 0;
+        for(int v : count) {
+            ans += v / 2 * 2;
+            if(ans % 2 == 0 && v % 2 == 1) ans++;
+        }
+        return ans;
+
+    }
+}
+```
+
+### 205. Isomorphic Strings
+我自己的解法！
+```java
+class Solution {
+    public boolean isIsomorphic(String s, String t) {
+        if(s.length() != t.length()) return false;
+        
+        HashMap<Character, Character> map = new HashMap();
+        for(int i = 0; i < s.length(); i++) {
+            if(!map.containsKey(s.charAt(i))) {
+                if(map.containsValue(t.charAt(i))) return false;
+                map.put(s.charAt(i), t.charAt(i));
+            }
+            else {
+                if(t.charAt(i) != map.get(s.charAt(i))) return false;
+            }
+        }
+        return true;
+    }
+}
+```
