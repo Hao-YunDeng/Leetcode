@@ -347,7 +347,7 @@ class Solution {
     public int countSubstrings(String s) {
         for(int i = 0; i < s.length(); i++) {
             extend(s, i, i);
-            extend(s, i, i + 1);
+            extend(s, i, i + 1);//这里不用担心右边界，extend自己会防止
         }
         return cnt;
     }
