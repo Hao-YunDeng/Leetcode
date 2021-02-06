@@ -339,3 +339,24 @@ class Solution {
     }
 }
 ```
+### 647. Palindromic Substrings
+判断一个string里面有多少substring是回文串
+```java
+class Solution {
+    int cnt = 0;    
+    public int countSubstrings(String s) {
+        for(int i = 0; i < s.length(); i++) {
+            extend(s, i, i);
+            extend(s, i, i + 1);
+        }
+        return cnt;
+    }
+    public void extend(String s, int l, int r) {
+        while(l >= 0 && r < s.length() && s.charAt(l) == s.charAt(r)) {
+            cnt++;
+            l--;
+            r++;
+        }
+    }
+}
+```
