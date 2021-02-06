@@ -340,7 +340,7 @@ class Solution {
 }
 ```
 ### 647. Palindromic Substrings
-判断一个string里面有多少substring是回文串
+判断一个string里面有多少substring是回文串，这是extend法ON^2。另有高级ON法，待研究。
 ```java
 class Solution {
     int cnt = 0;    
@@ -357,6 +357,33 @@ class Solution {
             l--;
             r++;
         }
+    }
+}
+```
+### 9. Palindrome Number
+判断一个数字是不是回文数。我的想法就是String.valueOf(int x)然后判断char
+```java
+class Solution {
+    public boolean isPalindrome(int x) {
+        String s = String.valueOf(x);
+        for(int i = 0; i < s.length() / 2; i++) {
+            if(s.charAt(i) != s.charAt(s.length() - i - 1)) return false;
+        }
+        return true;
+    }
+}
+```
+另外一个解法就是运用数学把数字翻转（优化可以是翻转后一半）
+```java
+class Solution {
+    public boolean isPalindrome(int x) {
+        int flip = 0;
+        int y = x;
+        while(y > 0) {
+            flip = flip * 10 + y % 10;
+            y = y / 10;
+        }
+        return flip == x;
     }
 }
 ```
