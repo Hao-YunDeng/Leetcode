@@ -387,3 +387,36 @@ class Solution {
     }
 }
 ```
+### 104. Maximum Depth of Binary Tree
+解法一：BFS，很慢，只快于7%
+```java
+class Solution {
+    public int maxDepth(TreeNode root) {
+        if(root == null) return 0;
+        
+        Queue<TreeNode> q = new LinkedList<>();
+        HashMap<TreeNode, Integer> depth = new HashMap<>();
+        q.offer(root);
+        depth.put(root, 1);
+        int max = 1;
+        while(!q.isEmpty()) {
+            TreeNode node = q.poll(); 
+            if(node.left != null || node.right != null) {
+                if(node.left != null) {
+                q.offer(node.left);
+                depth.put(node.left, depth.get(node) + 1);
+                }
+                
+                if(node.right != null) {
+                q.offer(node.right);
+                depth.put(node.right, depth.get(node) + 1);
+                }
+                
+                max = Math.max(max, depth.get(node) + 1);
+            }          
+        }
+        return max;
+        
+    }
+}
+```
