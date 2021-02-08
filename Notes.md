@@ -421,20 +421,21 @@ class Solution {
 }
 ```
 ```java
+### 543. Diameter of Binary Tree
 class Solution {
+    int ans;
     public int diameterOfBinaryTree(TreeNode root) {
-        if(root == null) return 0;
-        int lHeight = height(root.left);
-        int rheight = height(root.right);
-        int ldiameter = diameterOfBinaryTree(root.left);
-        int rdiameter = diameterOfBinaryTree(root.right);
-        int ans = Math.max(lHeight + rheight + 1, Math.max(ldiameter, rdiameter));
-        return ans;
-
+        if (root == null) return 0;
+        ans = 0;
+        depth(root);
+        return ans - 1;
     }
-    public int height(TreeNode root) {
-        if(root == null) return 0;
-        return 1 + Math.max(height(root.left), height(root.right));
+    public int depth(TreeNode node) {
+        if (node == null) return 0;
+        int L = depth(node.left);
+        int R = depth(node.right);
+        ans = Math.max(ans, L+R+1);
+        return Math.max(L, R) + 1;
     }
 }
 ```
