@@ -440,3 +440,39 @@ class Solution {
     }
 }
 ```
+### 226. Invert Binary Tree
+反正就是两种遍历，本题可以用后续遍历的DFS，先序后序无所谓。  
+或者BFS + Queue
+```java
+class Solution {
+    public TreeNode invertTree(TreeNode root) {
+        if(root == null) {
+            return null;
+        }
+        TreeNode right = invertTree(root.right);
+        TreeNode left = invertTree(root.left);
+        root.right = left;
+        root.left = right;
+        return root;
+        
+    }
+```
+```java
+class Solution {
+    public TreeNode invertTree(TreeNode root) {
+        if(root == null) return null;
+        Queue<TreeNode> q = new LinkedList<>();
+        q.offer(root);
+        while(!q.isEmpty()) {
+            TreeNode node = q.poll();
+            TreeNode temp = node.left;
+            node.left = node.right;
+            node.right = temp;
+            if(node.left != null) q.add(node.left);
+            if(node.right != null) q.add(node.right);
+        }
+        return root;
+    }
+}
+```
+}
