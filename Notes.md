@@ -420,3 +420,21 @@ class Solution {
     }
 }
 ```
+```java
+class Solution {
+    public int diameterOfBinaryTree(TreeNode root) {
+        if(root == null) return 0;
+        int lHeight = height(root.left);
+        int rheight = height(root.right);
+        int ldiameter = diameterOfBinaryTree(root.left);
+        int rdiameter = diameterOfBinaryTree(root.right);
+        int ans = Math.max(lHeight + rheight + 1, Math.max(ldiameter, rdiameter));
+        return ans;
+
+    }
+    public int height(TreeNode root) {
+        if(root == null) return 0;
+        return 1 + Math.max(height(root.left), height(root.right));
+    }
+}
+```
