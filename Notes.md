@@ -420,8 +420,9 @@ class Solution {
     }
 }
 ```
-```java
 ### 543. Diameter of Binary Tree
+值得复习，似乎全局变量要是不用的话就会麻烦的多...
+```java
 class Solution {
     int ans;
     public int diameterOfBinaryTree(TreeNode root) {
