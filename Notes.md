@@ -476,3 +476,17 @@ class Solution {
 }
 ```
 }
+### 617. Merge Two Binary Trees
+本题最关键两行代码在于，merge操作记得返回，更新left, right，而不只是合并val
+```java
+class Solution {
+    public TreeNode mergeTrees(TreeNode root1, TreeNode root2) {
+        if(root1 == null) return root2;
+        if(root2 == null) return root1;
+        root1.val = root1.val + root2.val;
+        root1.left = mergeTrees(root1.left, root2.left);
+        root1.right = mergeTrees(root1.right, root2.right);
+        return root1;        
+    }
+}
+```
