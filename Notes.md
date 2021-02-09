@@ -504,3 +504,24 @@ class Solution {
     }
 }
 ```
+### 437. Path Sum III
+思考和上题的关系：既然可以不从root出发，就有三种可能，从root出发，从root.left出发，从root.right出发，另外判断标准可以不为leaf，由此，可由上题改进而来：
+不返回true/false而是返回计数；
+判断标准只看sum==0，不看leaf.
+```java
+class Solution {
+    public int pathSum(TreeNode root, int sum) {
+        if(root == null) return 0;
+        return pathSumStartWithRoot(root, sum) + pathSum(root.left, sum) + pathSum(root.right, sum);
+    }
+    public int pathSumStartWithRoot(TreeNode root, int sum) {
+        if(root == null) return 0;
+        sum -= root.val;
+        
+        int res = 0;        
+        if(sum == 0) res = 1;
+        res += pathSumStartWithRoot(root.left, sum) + pathSumStartWithRoot(root.right, sum);
+        return res;
+    }
+}
+```
