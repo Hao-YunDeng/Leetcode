@@ -505,7 +505,7 @@ class Solution {
 }
 ```
 ### 437. Path Sum III
-思考和上题的关系：既然可以不从root出发，就有三种可能，从root出发，从root.left出发，从root.right出发，另外判断标准可以不为leaf，由此，可由上题改进而来：
+思考和上题的关系：既然可以不从root出发，就有两种种可能，从root出发，不从root出发。如果不从root出发就跟root没关系了，问题本身转化为参数为root.left或者root.right的同一问题。另外判断标准可以不为leaf，由此，可由上题改进而来：
 不返回true/false而是返回计数；
 判断标准只看sum==0，不看leaf.
 ```java
