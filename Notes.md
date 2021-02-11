@@ -537,7 +537,24 @@ class Solution {
         if(s == null && t == null) return true;
         if(s == null || t == null) return false;
         if(s.val != t.val) return false;
+        //只有相等了没有return才会继续比较
+        //如果return false，会return到召唤它递归的一级，层层返回 
         return isSubtreeWithRoot(s.left, t.left) && isSubtreeWithRoot(s.right, t.right);
+        
+    }
+}
+```
+### 101. Symmetric Tree
+```java
+class Solution {
+    public boolean isSymmetric(TreeNode root) {
+        return isMirror(root, root);        
+    }
+    public boolean isMirror(TreeNode s, TreeNode t) {
+        if(s == null && t == null) return true;
+        if(s == null || t == null) return false;
+        if(s.val != t.val) return false;
+        return isMirror(s.left, t.right) && isMirror(s.right, t.left);
     }
 }
 ```
