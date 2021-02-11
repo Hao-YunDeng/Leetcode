@@ -525,3 +525,19 @@ class Solution {
     }
 }
 ```
+### 572. Subtree of Another Tree
+判断t是不是s的subtree。思路跟上题一样
+```java
+class Solution {
+    public boolean isSubtree(TreeNode s, TreeNode t) {
+        if(s == null) return false;
+        return isSubtreeWithRoot(s, t) || isSubtree(s.left, t) || isSubtree(s.right, t);        
+    }
+    public boolean isSubtreeWithRoot(TreeNode s, TreeNode t) {
+        if(s == null && t == null) return true;
+        if(s == null || t == null) return false;
+        if(s.val != t.val) return false;
+        return isSubtreeWithRoot(s.left, t.left) && isSubtreeWithRoot(s.right, t.right);
+    }
+}
+```
