@@ -590,3 +590,27 @@ class Solution {
     }    
 }
 ```
+### 687. Longest Univalue Path
+本题非常类似543题path最长值，添加了要求，要求这个path上的值都相等。计数方法就变成，如果和本节点相等就累加，不想等就记0。同时时刻记录着最大值。
+```java
+class Solution {
+    int ans = 0;
+    public int longestUnivaluePath(TreeNode root) {
+        dfs(root);
+        return ans;
+    }
+    public int dfs(TreeNode root) {
+        if(root == null) return 0;
+        int left = dfs(root.left);
+        int right = dfs(root.right);
+        
+        int leftAns = root.left != null && root.left.val == root.val ? left + 1 : 0;
+        int rightAns = root.right != null && root.right.val == root.val ? right + 1 : 0;
+        
+        ans = Math.max(ans, leftAns + rightAns);
+        
+        return Math.max(leftAns, rightAns);
+        
+    }
+}
+```
