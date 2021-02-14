@@ -559,7 +559,7 @@ class Solution {
 }
 ```
 ### 111. Minimum Depth of Binary Tree
-求根节点到叶子节点的最短距离。本题我们总结一下这种递归：post order DFS。一般的递归思路：先想这个题能不能用递归做（假如知道子问题能不能解决本问题），然后想子问题一个返回什么，最后想初始条件，额外思考一下有没有陷阱，亦即特殊情况，用if修正。完事。具体来说本题思路就是，首先，可以用递归做，第二，需要左边最小，右边最小，二者中较小的加一即为本节点。初始条件不用多说。特殊情况就是左右当中如果有零不能算较小者，应该返回非零者加一。
+求根节点到叶子节点的最短距离。本题我们总结一下这种递归：post order DFS。一般的递归思路：先想这个题能不能用递归做（假如知道子问题能不能解决本问题），然后想子问题应该返回什么，最后想初始条件，额外思考一下有没有陷阱，亦即特殊情况，用if修正。完事。具体来说本题思路就是，首先，可以用递归做，第二，需要左边最小，右边最小，二者中较小的加一即为本节点。初始条件不用多说。特殊情况就是左右当中如果有零不能算较小者，应该返回非零者加一。
 ```java
 class Solution {
     public int minDepth(TreeNode root) {
@@ -572,5 +572,21 @@ class Solution {
         
         return Math.min(left, right) + 1;
     }
+}
+```
+### 404. Sum of Left Leaves
+树的所有“左叶子”的和。解题思路：首先本题可以用递归做，需要左子树的“左叶子”和，以及右子树的“左叶子”和，加起来即为返回值，特殊情况是，左子树已经是leaf了，应提前返回，此时左子叶的和即为本身值。
+```java
+class Solution {
+    public int sumOfLeftLeaves(TreeNode root) {
+        if(root == null) return 0;   
+        
+        if(root.left != null) {
+            if(root.left.left == null && root.left.right == null) {
+                return root.left.val + sumOfLeftLeaves(root.right);
+            }
+        }         
+        return sumOfLeftLeaves(root.left) + sumOfLeftLeaves(root.right);       
+    }    
 }
 ```
