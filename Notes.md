@@ -639,8 +639,7 @@ class Solution {
     public int bfs(TreeNode root) {
         if(root == null) return -1;
         int min = root.val;
-        //Long secondMin = Long.MAX_VALUE;
-        long secondMin = Long.MAX_VALUE; 
+        Long secondMin = Long.MAX_VALUE;
         boolean found = false;
         Queue<TreeNode> q = new LinkedList<>();
         q.add(root);
