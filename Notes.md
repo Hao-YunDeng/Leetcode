@@ -614,3 +614,47 @@ class Solution {
     }
 }
 ```
+### 671. Second Minimum Node In a Binary Tree
+```java
+class Solution {
+    public int findSecondMinimumValue(TreeNode root) {
+        if(root == null) return -1;
+        //return dfs(root, root.val);
+        return bfs(root);
+    }
+    public int dfs(TreeNode root, int min) {
+        if(root == null) return -1;
+        
+        if(root.val > min) return root.val;
+        
+        int l = dfs(root.left, min);
+        int r = dfs(root.right, min);
+        
+        if(l == -1) return r;
+        if(r == -1) return l;
+        
+        return Math.min(l, r);
+    }
+    
+    public int bfs(TreeNode root) {
+        if(root == null) return -1;
+        int min = root.val;
+        //Long secondMin = Long.MAX_VALUE;
+        long secondMin = Long.MAX_VALUE; 
+        boolean found = false;
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(root);
+        while(!q.isEmpty()) {
+            TreeNode node = q.poll();
+            if(node.val > min && node.val < secondMin) {
+                secondMin = new Long(node.val);
+                found = true;
+                continue;
+            }
+            if(node.left != null) q.add(node.left);
+            if(node.right != null) q.add(node.right);
+        }
+        return found ? secondMin.intValue() : -1;
+    }
+}
+```
