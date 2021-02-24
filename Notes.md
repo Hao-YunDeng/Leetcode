@@ -657,3 +657,27 @@ class Solution {
     }
 }
 ```
+### 637. Average of Levels in Binary Tree
+很典型的BFS，技巧是用一个int size记录每层节点数。这个技巧还可用于BFS求层数。
+```java
+class Solution {
+    public List<Double> averageOfLevels(TreeNode root) {       
+        List<Double> ans = new ArrayList<>();
+        if(root == null) return ans;
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(root);
+        while(!q.isEmpty()) {
+            int size = q.size();
+            Double sum = 0.0;
+            for(int i = 0; i < size; i++) {
+                TreeNode node = q.poll();
+                if(node.left != null) q.add(node.left);
+                if(node.right != null) q.add(node.right);
+                sum += node.val;
+            }
+            ans.add(sum / size);
+        }
+        return ans;
+    }
+}
+```
