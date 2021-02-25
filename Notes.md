@@ -681,3 +681,20 @@ class Solution {
     }
 }
 ```
+### 144. Binary Tree Preorder Traversal
+这个题注意，声明ans是注意是list还是array list，要和后面的dfs函数接收变量匹配。
+```java
+class Solution {
+    public List<Integer> preorderTraversal(TreeNode root) {
+        List<Integer> ans = new ArrayList<>();
+        dfs(root, ans);
+        return ans;
+    }
+    public void dfs(TreeNode node, List<Integer> list) {
+        if(node == null) return;
+        list.add(node.val);
+        dfs(node.left, list);
+        dfs(node.right, list);
+    }
+}
+```
