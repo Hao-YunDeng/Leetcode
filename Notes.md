@@ -698,3 +698,23 @@ class Solution {
     }
 }
 ```
+### 669. Trim a Binary Search Tree
+多回味。可以写的更简洁，见答案，但是我记在这里，好理解的一种写法。
+```java
+class Solution {
+    public TreeNode trimBST(TreeNode root, int low, int high) {
+        if (root == null) return root;
+        
+        if (root.val <= high && root.val >= low) {
+            root.left = trimBST(root.left, low, high);
+            root.right = trimBST(root.right, low, high);
+        }
+        
+        else if (root.val < low) root = trimBST(root.right, low, high);
+        
+        else if (root.val > high) root = trimBST(root.left, low, high);
+        
+        return root;
+    }
+}
+```
