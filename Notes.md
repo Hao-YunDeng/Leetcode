@@ -718,7 +718,8 @@ class Solution {
     }
 }
 ```
-### 236 236. Lowest Common Ancestor of a Binary Tree
+### 236. Lowest Common Ancestor of a Binary Tree
+其实跟235一样的。
 ```java
 class Solution {
     public TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
