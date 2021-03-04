@@ -869,3 +869,52 @@ class MapSum {
     }
 }
 ```
+或者用array：
+```java
+class MapSum {
+    class TrieNode {
+        TrieNode[] children;
+        int sum;
+        
+        public TrieNode() {
+            this.children = new TrieNode[26];
+            this.sum = 0;
+        }
+    }
+
+    /** Initialize your data structure here. */
+    TrieNode root; 
+    HashMap<String, Integer> map; //Haoyun: Record all the prefixes
+    
+    public MapSum() {
+        root = new TrieNode();
+        map = new HashMap();
+    }
+    
+    public void insert(String key, int val) {
+        int diff  = val - map.getOrDefault(key, 0);
+        map.put(key, val);
+        TrieNode curr = root;
+        for(char c : key.toCharArray()) {
+            if(curr.children[c - 'a'] == null) {
+                curr.children[c - 'a'] = new TrieNode();
+            }
+            curr = curr.children[c - 'a'];
+            curr.sum += diff;
+        }
+    }
+    
+    public int sum(String prefix) {
+        TrieNode curr = root;
+        for(char c : prefix.toCharArray()) {
+            if(curr.children[c - 'a'] != null) {
+                curr = curr.children[c - 'a'];
+            }
+            else {
+                return 0;
+            }
+        }
+        return curr.sum;
+    }
+}
+```
