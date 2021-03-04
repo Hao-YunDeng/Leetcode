@@ -1,7 +1,7 @@
 ## Arrays
-## 378. Kth Smallest Element in a Sorted Matrix (Medium)
+### 378. Kth Smallest Element in a Sorted Matrix (Medium)
 题目描述：矩阵行列分别升序，寻找返回第k小的元素
-### 解法一：PriorityQueue with tuple class and comparator
+#### 解法一：PriorityQueue with tuple class and comparator
 思路：利用PriorityQueue自动返回最小的功能，首先将矩阵第一行（或第一列）元素放入，返回最小者，然后放入最小者的后面一个，重复k次即可
 
 时间复杂度：minHeap(early stop adding) O(min(K,N)+K∗logN)
@@ -41,7 +41,7 @@ class Solution {
     }
 }
 ```
-### 解法二：PriorityQueue with tuple comparable
+#### 解法二：PriorityQueue with tuple comparable
 思路：同上，注意比较，这里用的comparable
 
 ```java
@@ -69,7 +69,7 @@ class Tuple implements Comparable<Tuple> {
     }
 }
 ```
-### 解法三：binary search
+#### 解法三：binary search
 思路：while lo<hi, 左侧含mid，cnt保证lo hi之间必有想要矩阵元，当lo=hi时返回，while内部：cnt<k时说明全左含mid都不够，lo=mid+1；否则说明含mid是够的，hi=mid，注意不减一
 
 复杂度：N*log(max-min)
@@ -94,12 +94,12 @@ class Solution {
     }
 }
 ```
-## 645. Set Mismatch
+### 645. Set Mismatch
 题目描述：array本应存储1 ~ n，但是有一个数missing，有一个数duplicated，找出两者，数组返回
-### 解法一：排序之后扫描一次
+#### 解法一：排序之后扫描一次
 思路：发现array[i-1]==array[i]即duplicated，发现array[i-1]<a[i]+1,则array[i-1]+1即missing。时间复杂度为NlogN，排序空间复杂度logN
 
-### 解法二：使用计数HashMap或array扫描两次
+#### 解法二：使用计数HashMap或array扫描两次
 思路：HashMap，先扫一遍计数，计数 = .getOrDefault(i, 0)+1，然后再扫一遍HashMap，如果containsKey再判断是否为2，否则不containsKey就是missing。时空均为N 。同样的，也可以用array计数。
 ``` java
 class Solution {
@@ -124,7 +124,7 @@ class Solution {
 }
 ```
     
-### 解法三：Negative Mark
+#### 解法三：Negative Mark
 思路：把数组中数-1当index，翻转数组中这个index的数，翻转之前检查是否曾经被翻转过（注意使用Math.abs()），如果是，不要再次翻转了，这个index曾经出现过，所以duplicated数就是此index + 1。这样一次循环结束后本应所有index上的数都被翻过恰好一次，除了从未出现的index，所以再扫一遍，未翻转过的数所在index从未出现过，missing = index + 1
 复杂度： 时间N 空间1.
 ```java
@@ -148,10 +148,10 @@ class Solution {
     }
 }
 ```
-### 解法四：Swapping
+#### 解法四：Swapping
 思路：尚未明白
 
-## 667. Beautiful Arrangement II
+### 667. Beautiful Arrangement II
 题目描述：将整数1~n重排为这样，相邻两数的差值只有k个不同的数，k<n.
 解法：重排为1, 2, 3, ..., n-k-1, n-k; n, n-k+1, n-1, n-k+2, ..., n-k+1+[(k-1)/2], n-k+1+[k/2]
 验证：差为1, 1, 1, ..., 1, 1（共n-k-1个）; k, k-1, k-2, k-3, ..., 1(共k个)  
@@ -171,7 +171,7 @@ class Solution {
 }
 ```
 
-## 697: Degree of an Array
+### 697: Degree of an Array
 degree of this array is defined as the maximum frequency of any one of its elements. Your task is to find the smallest possible length of a (contiguous) subarray of nums, that has the same degree as nums
 就是直接扫几遍
 ```java
@@ -201,7 +201,7 @@ class Solution {
     }
 }
 ```
-## 565. Array Nesting
+### 565. Array Nesting
 详见Excel，写的很清楚了，贴在这里主要学习一下  
 1. 虽看起来两重循环嵌套实际只一层  
 2. 传递值的新写法
