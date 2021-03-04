@@ -1,5 +1,7 @@
 # Leetcode 笔记
 
+- [树](Tree.md)
+- 
 ## 378. Kth Smallest Element in a Sorted Matrix (Medium)
 题目描述：矩阵行列分别升序，寻找返回第k小的元素
 ### 解法一：PriorityQueue with tuple class and comparator
