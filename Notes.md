@@ -1,5 +1,5 @@
 # Leetcode 笔记
 
-- [树](Tree.md)
-- 
+- [Araay](Array.md)
+- [Tree](Tree.md)
 
