@@ -756,3 +756,116 @@ class Solution {
     }
 }
 ```
+### 208. Implement Trie (Prefix Tree)
+```java
+class Trie {
+    
+    class TrieNode {
+        boolean isWord = false;
+        HashMap<Character, TrieNode> children = new HashMap();
+        
+        public TrieNode() {
+            this.children = new HashMap<>();
+        }
+    }
+    
+    TrieNode root;
+
+    /** Initialize your data structure here. */
+    public Trie() {
+        this.root = new TrieNode();
+    }
+    
+    /** Inserts a word into the trie. */
+    public void insert(String word) {
+        TrieNode currNode = root;
+        for(int i = 0; i < word.length(); i++) {
+            char c = word.charAt(i);            
+            if(!currNode.children.containsKey(c)) {
+                currNode.children.put(c, new TrieNode());
+            }
+            currNode = currNode.children.get(c);
+        }
+        currNode.isWord = true;
+    }
+    
+    /** Returns if the word is in the trie. */
+    public boolean search(String word) {
+        TrieNode currNode = root;
+        for(int i = 0; i < word.length(); i++) {
+            char c = word.charAt(i);            
+            if(!currNode.children.containsKey(c)) {
+                return false;
+            }
+            currNode = currNode.children.get(c);
+        }
+        return currNode.isWord;
+        
+    }
+    
+    /** Returns if there is any word in the trie that starts with the given prefix. */
+    public boolean startsWith(String prefix) {
+        TrieNode currNode = root;
+        for(int i = 0; i < prefix.length(); i++) {
+            char c =prefix.charAt(i);            
+            if(!currNode.children.containsKey(c)) {
+                return false;
+            }
+            currNode = currNode.children.get(c);
+        }
+        return true;
+        
+    }
+}
+```
+### 677. Map Sum Pairs
+每个节点带有以他为前缀的val和
+```java
+class MapSum {
+    class TrieNode {
+        Map<Character, TrieNode> children;
+        int sum;
+        
+        public TrieNode() {
+            this.children = new HashMap();
+            this.sum = 0;
+        }
+    }
+
+    /** Initialize your data structure here. */
+    TrieNode root; 
+    HashMap<String, Integer> map; //Haoyun: Record all the prefixes
+    
+    public MapSum() {
+        root = new TrieNode();
+        map = new HashMap();
+    }
+    
+    public void insert(String key, int val) {
+        int diff  = val - map.getOrDefault(key, 0);
+        map.put(key, val);
+        TrieNode curr = root;
+        //curr.sum += diff; 
+        //Haoyun: root is the word starting with empty, 
+        //and all words start with empty. This is unnecessary
+        for(char c : key.toCharArray()) {
+            curr.children.putIfAbsent(c, new TrieNode());
+            curr = curr.children.get(c);
+            curr.sum += diff;
+        }
+    }
+    
+    public int sum(String prefix) {
+        TrieNode curr = root;
+        for(char c : prefix.toCharArray()) {
+            if(curr.children.get(c) != null) {
+                curr = curr.children.get(c);
+            }
+            else {
+                return 0;
+            }
+        }
+        return curr.sum;
+    }
+}
+```
