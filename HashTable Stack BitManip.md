@@ -112,3 +112,22 @@ class MinStack {
     }
 }
 ```
+### 739. Daily Temperatures
+输入温度数组，返回一个数组，每个元素是温度数组相应元素后面还要几天才能升温。
+```java
+class Solution {
+    public int[] dailyTemperatures(int[] T) {
+        Stack<Integer> stack = new Stack<>();
+        
+        int[] res = new int[T.length];
+        for (int i = 0; i < T.length; i++) {
+            while (!stack.isEmpty() && T[stack.peek()] < T[i]) {
+                int idx = stack.pop();
+                res[idx] = i - idx;
+            }
+            stack.push(i);                
+        }
+        return res;
+    }
+}
+```
