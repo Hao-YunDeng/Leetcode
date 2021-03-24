@@ -131,3 +131,19 @@ class Solution {
     }
 }
 ```
+### 461. Hamming Distance
+很简单，异或之后数1的个数，注意if语句不能少。
+```java
+class Solution {
+    public int hammingDistance(int x, int y) {
+        int cnt = 0;
+        int z = x ^ y;
+        while (z != 0) {
+            if (z % 2 == 1) cnt++;
+            z = z >> 1;            
+        }
+        return cnt;
+        
+    }
+}
+```
