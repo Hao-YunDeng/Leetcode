@@ -147,3 +147,22 @@ class Solution {
     }
 }
 ```
+### 371. Sum of Two Integers
+这是while写法，也可写成递归的，见cs-note
+```java
+class Solution {
+    public int getSum(int a, int b) {
+        
+        int sum = 0;
+        int carry = 0;
+        
+        while (b != 0) {
+            sum = a ^ b;
+            carry = (a & b) << 1;
+            a = sum;
+            b = carry;
+        }
+        return a;        
+    }
+}
+```
