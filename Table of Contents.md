@@ -2,6 +2,6 @@
 
 - [Array](Array.md)
 - [Tree](Tree.md)
-- [Stack](Array.md)
-- [Bit Manipulatin](Tree.md)
+- [Stack, Bit Manipulatino](HashTable Stack BitManip.md)
+- [Graph](Graph.md)
 
