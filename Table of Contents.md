@@ -1,5 +1,7 @@
 # Leetcode 笔记
 
-- [Araay](Array.md)
+- [Array](Array.md)
 - [Tree](Tree.md)
+- [Stack](Array.md)
+- [Bit Manipulatin](Tree.md)
 
