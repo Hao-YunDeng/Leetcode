@@ -47,3 +47,39 @@ class Solution {
     }
 }
 ```
+### 207. Course Schedule
+```java
+class Solution {    
+    public boolean canFinish(int numCourses, int[][] prerequisites) {
+        boolean[] visited = new boolean[numCourses];
+        boolean[] inStack = new boolean[numCourses];
+        ArrayList<Integer>[] graph = new ArrayList[numCourses];
+        for (int i = 0; i < numCourses; i++) {
+            graph[i] = new ArrayList<>();
+        }
+        for (int[] pair : prerequisites) {
+            graph[pair[1]].add(pair[0]);
+        }
+        for (int i = 0; i < numCourses; i++) {
+            if (!visited[i] && explore(graph, i, visited, inStack)) {
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    boolean explore(ArrayList<Integer>[] graph, int v, boolean[] visited, boolean[] inStack) {
+        //return *true* if there's a cycle
+        visited[v] = true;
+        inStack[v] = true;
+        for (int u : graph[v]) {
+            if (inStack[u]) return true;
+            if (!visited[u]) {
+                if (explore(graph, u, visited, inStack)) return true;
+            }
+        }
+        inStack[v] = false;
+        return false;
+    }
+}
+```
