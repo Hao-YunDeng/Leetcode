@@ -121,3 +121,52 @@ class Solution {
     
 }
 ```
+### 210. Course Schedule II
+```java
+class Solution {
+    public int[] findOrder(int numCourses, int[][] prerequisites) {
+        boolean[] visited = new boolean[numCourses];
+        boolean[] inStack = new boolean[numCourses];
+        List<Integer> res = new ArrayList<>();
+        
+        ArrayList<Integer>[] graph = new ArrayList[numCourses];
+        for (int i = 0; i < numCourses; i++) {
+            graph[i] = new ArrayList<>();
+        }
+        for (int[] pair : prerequisites) {
+            graph[pair[1]].add(pair[0]);
+        }
+        
+        for (int i = 0; i < numCourses; i++) {
+            
+            if (!visited[i] && dfs(graph, i, visited, inStack, res)) {
+                return new int[0];
+            }
+        }
+        
+        int[] ret = new int[numCourses];
+        for (int i = 0; i < numCourses; i++) {
+            ret[numCourses - i - 1] = res.get(i);
+            //Note: we need to reverse the prder
+            //because dfs finishes the inner most one first, 
+            //which is the last one in the correct order 
+        }
+        return ret;
+    }    
+    
+    boolean dfs(ArrayList<Integer>[] graph, int v, boolean[] visited, boolean[] inStack, List<Integer> res) {
+        //returns true if there is a cycle
+        visited[v] = true;
+        inStack[v] = true;
+        for (int u : graph[v]) {
+            if (inStack[u]) return true;
+            if (!visited[u]) {
+                if (dfs(graph, u, visited, inStack, res)) return true;
+            }
+        }
+        res.add(v);
+        inStack[v] = false;
+        return false;
+    } 
+}
+```
