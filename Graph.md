@@ -147,7 +147,7 @@ class Solution {
         int[] ret = new int[numCourses];
         for (int i = 0; i < numCourses; i++) {
             ret[numCourses - i - 1] = res.get(i);
-            //Note: we need to reverse the prder
+            //Note: we need to reverse the order
             //because dfs finishes the inner most one first, 
             //which is the last one in the correct order 
         }
