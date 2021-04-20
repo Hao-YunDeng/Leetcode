@@ -36,3 +36,33 @@ class Solution {
     }
 }
 ```
+### 21. Merge Two Sorted Lists
+```java
+class Solution {
+    public ListNode mergeTwoLists(ListNode l1, ListNode l2) {
+//法一：新建头然后逐个比较插入        
+        ListNode newHead = new ListNode(-1);
+        ListNode curr = newHead;
+        while (l1 != null && l2 != null) {
+            if (l1.val < l2.val) {
+                curr.next = l1;
+                l1 = l1.next;
+                curr = curr.next;
+            }    
+            else {
+                curr.next = l2;
+                l2 = l2.next;
+                curr = curr.next;
+            }
+        }
+        
+        if (l1 == null) {
+            curr.next = l2;
+        }
+        else {
+            curr.next = l1;
+        }
+        
+        return newHead.next;
+    }
+}
