@@ -80,3 +80,27 @@ class Solution {
 //         }
     } 
 }
+### 83. Remove Duplicates from Sorted List
+```java
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        if (head == null || head.next == null) return head;
+        //法一：递归
+        // head.next = deleteDuplicates(head.next);
+        // return head.val == head.next.val ? head.next : head;
+        //法二：遍历
+        ListNode curr = head;
+        while (curr.next != null) {
+            if (curr.next.val == curr.val) {
+                curr.next = curr.next.next;
+            }
+            else {
+                //这里else是必要的，因为如果删除了并且移动的话有可能curr变null，
+                //while里面curr.next就会出错
+                curr = curr.next;
+            }            
+        }
+        return head;
+    }
+}
+```
