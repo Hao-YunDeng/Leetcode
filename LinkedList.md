@@ -80,6 +80,7 @@ class Solution {
 //         }
     } 
 }
+```
 ### 83. Remove Duplicates from Sorted List
 ```java
 class Solution {
@@ -100,6 +101,25 @@ class Solution {
                 curr = curr.next;
             }            
         }
+        return head;
+    }
+}
+```
+### 19. Remove Nth Node From End of List
+```java
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        if(head == null || head.next == null) return null;
+        ListNode fast = head;
+        for (int i = 0; i < n; i++) fast = fast.next;
+        if (fast == null) return head.next;
+        
+        ListNode slow = head;
+        while (fast.next != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+        slow.next = slow.next.next;
         return head;
     }
 }
