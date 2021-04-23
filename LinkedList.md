@@ -124,3 +124,33 @@ class Solution {
     }
 }
 ```
+### 445. Add Two Numbers II
+```java
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        Stack<Integer> s1 = new Stack<>();
+        Stack<Integer> s2 = new Stack<>();
+        while (l1 != null) {
+            s1.push(l1.val);
+            l1 = l1.next;
+        }
+        while (l2 != null) {
+            s2.push(l2.val);
+            l2 = l2.next;
+        }
+        
+        int currSum = 0;
+        int carry = 0;
+        ListNode head = null;
+        while (!s1.isEmpty() || !s2.isEmpty() || carry != 0) {
+            currSum = carry + (s1.isEmpty() ? 0 : s1.pop()) + (s2.isEmpty() ? 0 : s2.pop()); 
+            carry = currSum / 10;
+            currSum %= 10;
+            ListNode node = new ListNode(currSum);
+            node.next = head;
+            head = node;
+        }
+        return head;
+    }
+}
+```
