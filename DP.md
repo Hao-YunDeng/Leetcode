@@ -56,3 +56,22 @@ class NumArray {
     }
 }
 ```
+343. Integer Break
+```java
+class Solution {
+    public int integerBreak(int n) {
+        int[] dp = new int[n + 1];
+        dp[0] = 100; //I don't need it
+        dp[1] = 1;
+    
+        for (int i = 2; i <= n; i++) {
+            for (int j = 1; j <= i / 2; j++) {
+                //Call the smallest split the first split, so it won't be 
+                //larger than half of the original
+                dp[i] = Math.max(dp[i], Math.max(j * dp[i - j], j * (i - j)));
+            }
+        }
+        return dp[n];
+    }
+}
+```
