@@ -56,7 +56,7 @@ class NumArray {
     }
 }
 ```
-343. Integer Break
+### 343. Integer Break
 ```java
 class Solution {
     public int integerBreak(int n) {
