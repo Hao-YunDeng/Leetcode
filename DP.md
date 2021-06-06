@@ -94,3 +94,33 @@ class Solution {
     }
 }
 ```
+### 376. Wiggle Subsequence
+```java
+class Solution {
+    public int wiggleMaxLength(int[] nums) {
+        if (nums.length == 0) return 0;
+        int n = nums.length;
+        int[] dpUp = new int[n];
+        int[] dpDown = new int[n];
+        dpUp[0] = 1;
+        dpDown[0] = 1;
+        int max = 1;
+        for (int i = 1; i < n; i++) {
+            if(nums[i] < nums[i - 1]) {
+                dpDown[i] = dpUp[i - 1] + 1;
+                dpUp[i] = dpUp[i - 1];
+            }
+            else if(nums[i] > nums[i - 1]) {
+                dpUp[i] = dpDown[i - 1] + 1;
+                dpDown[i] = dpDown[i - 1];
+            }
+            else {
+                dpUp[i] = dpUp[i - 1];
+                dpDown[i] = dpDown[i - 1];
+            }
+            max = Math.max(max, Math.max(dpUp[i], dpDown[i]));
+        }
+        return max;
+    }
+}
+```
