@@ -147,3 +147,26 @@ class Solution {
     }
 }
 ```
+### 714. Best Time to Buy and Sell Stock with Transaction Fee
+```java
+class Solution {
+    public int maxProfit(int[] prices, int fee) {
+        int n = prices.length;
+        int[] have = new int[n + 1];
+        int[] notHave = new int[n + 1];
+        
+        notHave[0] = 0;
+        have[0] = Integer.MIN_VALUE / 2;
+        //Note: if /2 then - fee can be put on either side; 
+        //if not /2 then - fee on the MIN_VALUE side will
+        //cause overflow, so must be on the non-MIN side!!
+        for (int i = 1; i <= n; i++) {
+            notHave[i] = Math.max(notHave[i - 1], have[i - 1] + prices[i - 1] - fee);
+            have[i] = Math.max(have[i - 1], notHave[i - 1] - prices[i - 1] );
+        }
+        
+        return Math.max(have[n], notHave[n]);
+    }
+   
+}
+```
