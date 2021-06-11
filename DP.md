@@ -124,3 +124,26 @@ class Solution {
     }
 }
 ```
+### 309. Best Time to Buy and Sell Stock with Cooldown
+```java
+class Solution {
+    public int maxProfit(int[] prices) {
+        int n = prices.length;
+        int[] have = new int[n + 1];
+        int[] notHave = new int[n + 1];
+        
+        notHave[0] = 0;
+        notHave[1] = 0;
+        have[0] = Integer.MIN_VALUE;
+        have[1] = - prices[0];
+        //int maxRes = 0;
+        for (int i = 2; i <= n; i++) {
+            notHave[i] = Math.max(notHave[i - 1], have[i - 1] + prices[i - 1]);
+            have[i] = Math.max(have[i - 1], notHave[i - 2] - prices[i - 1]);
+            //maxRes = Math.max(maxRes, notHave[i]);
+        }
+        return Math.max(have[n], notHave[n]);
+        //return maxRes;
+    }
+}
+```
