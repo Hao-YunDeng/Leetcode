@@ -240,4 +240,7 @@ class Solution {
 }
 ```
 #### 现在我们总结四道股票题：
-啊啊啊
+Cooldown: 因为没有交易次数限制，[days][0, 1]. 因为涉及冷却时间，所以时间维度不可压缩  
+transaction fee: 同样没有交易次数，[days][0, 1]. 没有冷却时间，时间维度可以压缩，于是变成单变量DP  
+限制两次交易：[days][trans1, trans2][0, 1]. 时间可压缩，trans1, trans2, sell, buy可以变成四个变量buy1, sell1, buy2, sell2 的 DP  
+k次交易：[days][trans's][0, 1]. 同样时间可压缩
