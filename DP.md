@@ -240,7 +240,48 @@ class Solution {
 }
 ```
 #### 现在我们总结四道股票题：
-Cooldown: 因为没有交易次数限制，[days][0, 1]. 因为涉及冷却时间，所以时间维度不可压缩  
-transaction fee: 同样没有交易次数，[days][0, 1]. 没有冷却时间，时间维度可以压缩，于是变成单变量DP  
-限制两次交易：[days][trans1, trans2][0, 1]. 时间可压缩，trans1, trans2, sell, buy可以变成四个变量buy1, sell1, buy2, sell2 的 DP  
-k次交易：[days][trans's][0, 1]. 同样时间可压缩
+Cooldown: 因为没有交易次数限制，[days + 1][0, 1]. 因为涉及冷却时间，所以时间维度不可压缩  
+transaction fee: 同样没有交易次数，[days + 1][0, 1]. 没有冷却时间，时间维度可以压缩，于是变成单变量DP  
+限制两次交易：[days + 1][trans1, trans2][0, 1]. 时间可压缩，trans1, trans2, sell, buy可以变成四个变量buy1, sell1, buy2, sell2 的 DP  
+k次交易：[days + 1][trans's + 1][0, 1]. 同样时间可压缩  
+
+另外的两道股票交易题：一个是不限交易，无fee无冷却，只需把fee拿到题去除fee即可，[days + 1][0, 1]；另一个是只许交易一次，同样是[days + 1][0, 1]，但转移方式不同，这个类似于限制两次那种
+### 122. Best Time to Buy and Sell Stock II, no limitation
+```java
+class Solution {
+    public int maxProfit(int[] prices) {
+        int n = prices.length;
+        if (n == 0) return 0;
+        
+        int[][] dp = new int[n + 1][2];
+        
+        dp[0][0] = 0;
+        dp[0][1] = Integer.MIN_VALUE;
+        
+        for (int i = 1; i <= n; i++) {
+            dp[i][0] = Math.max(dp[i - 1][0], dp[i - 1][1] + prices[i - 1]);
+            dp[i][1] = Math.max(dp[i - 1][1], dp[i - 1][0] - prices[i - 1]);
+        }
+        return dp[n][0];
+        
+    }
+}
+```
+
+### 121. Best Time to Buy and Sell Stock, only once
+```java
+class Solution {
+    public int maxProfit(int[] prices) {
+        int n = prices.length;
+        if (n == 0) return 0;
+        
+        int have = Integer.MIN_VALUE, notHave = 0;
+        
+        for (int price : prices) {
+            if (- price > have) have = -price;
+            if (have + price > notHave) notHave = have + price;
+        }
+        return notHave;
+    }
+}
+```
