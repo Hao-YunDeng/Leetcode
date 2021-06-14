@@ -170,3 +170,72 @@ class Solution {
    
 }
 ```
+### 123. Best Time to Buy and Sell Stock III
+```java
+class Solution {
+    public int maxProfit(int[] prices) {
+        int n = prices.length;
+        int buy1 = Integer.MIN_VALUE;
+        int sell1 = 0;
+        int buy2 = Integer.MIN_VALUE;
+        int sell2 = 0;
+        
+        for (int price : prices) {
+            if (- price > buy1) buy1 = -price;
+            if (price + buy1 > sell1) sell1 = price + buy1;
+            
+            if (- price + sell1 > buy2) buy2 = -price + sell1;
+            if (price + buy2 > sell2) sell2 = price + buy2;
+        }
+        return sell2;
+        
+    }
+}
+```
+### 188. Best Time to Buy and Sell Stock IV
+```java
+class Solution {
+    public int maxProfit(int k, int[] prices) {
+        int n = prices.length;
+        if (n == 0) return 0;
+        
+        if (k > n / 2) k = n / 2;
+        
+//         int[][][] dp = new int[n + 1][k + 1][2];
+//         for (int j = 0; j < k + 1; j++) {
+//             dp[0][j][0] = 0;
+//             dp[0][j][1] = Integer.MIN_VALUE;
+//         }
+//         int max = 0;
+//         for (int i = 1; i <= n; i++) {
+//             for (int j = 1; j <= k; j++) {
+                   //I don't worry about j = 0 since zero transaction automatically 0 already as default
+//                 dp[i][j][0] = Math.max(dp[i - 1][j][0], dp[i - 1][j][1] + prices[i - 1]);
+                
+//                 //In this notation, when I buy in, it's already considered a transaction.
+//                 //This is helpful for making sure the max of the prev transaction
+//                 //is a true max, since buying in will decrease its value.
+                
+//                 dp[i][j][1] = Math.max(dp[i - 1][j][1], dp[i - 1][j - 1][0] - prices[i - 1]);
+//                 max = Math.max(max, dp[i][j][0]);
+//             }
+//         }
+//         return max;
+        
+        int[][] dp = new int[k + 1][2];
+        for (int j = 0; j <= k; j++) {
+            dp[j][0] = 0;
+            dp[j][1] = Integer.MIN_VALUE;
+        }
+        int max = 0;
+        for (int i = 1; i <= n; i++) {
+            for (int j = 1; j <= k; j++) {
+                dp[j][0] = Math.max(dp[j][0], dp[j][1] + prices[i - 1]);
+                dp[j][1] = Math.max(dp[j][1], dp[j - 1][0] - prices[i - 1]);
+                max = Math.max(max, dp[j][0]);
+            }    
+        }
+        return max;
+    }
+}
+```
