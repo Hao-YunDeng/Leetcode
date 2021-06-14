@@ -245,7 +245,7 @@ transaction fee: 同样没有交易次数，[days + 1][0, 1]. 没有冷却时间
 限制两次交易：[days + 1][trans1, trans2][0, 1]. 时间可压缩，trans1, trans2, sell, buy可以变成四个变量buy1, sell1, buy2, sell2 的 DP  
 k次交易：[days + 1][trans's + 1][0, 1]. 同样时间可压缩  
 
-另外的两道股票交易题：一个是不限交易，无fee无冷却，只需把fee拿到题去除fee即可，[days + 1][0, 1]；另一个是只许交易一次，同样是[days + 1][0, 1]，但转移方式不同，这个类似于限制两次那种
+另外的两道股票交易题：一个是不限交易，无fee无冷却，只需把fee拿到题去除fee即可，[days + 1][0, 1]；另一个是只许交易一次，同样是[days + 1][0, 1]，但转移方式不同，这个类似于限制两次那种，独立的if条件使得买和卖独立演化，保证只一次（或两次）。
 ### 122. Best Time to Buy and Sell Stock II, no limitation
 ```java
 class Solution {
