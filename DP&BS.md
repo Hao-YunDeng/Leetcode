@@ -346,3 +346,28 @@ class Solution {
     }
 }
 ```
+### 69. Sqrt(x)
+```java
+class Solution {
+    public int mySqrt(int x) {
+        if (x == 1) return 1;
+        int l = 1, h = x;
+        while (l <= h) {
+            int mid = (l + h) / 2;
+            
+            if (x / mid == mid) return mid;
+            
+            if (mid < x / mid) {
+                l = mid + 1;
+            }
+            
+            else if (mid > x / mid) {
+                h = mid - 1;
+            }
+        }
+        //因为向下取整，考虑到1向上跳, h向下跨越
+        //所以返回l-1或者h均可
+        return h;
+    }
+}
+```
