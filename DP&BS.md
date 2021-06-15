@@ -307,3 +307,42 @@ class Solution {
     }
 }
 ```
+### 我们先总结一下BS，特别是边界条件，用下面两道题确定一个范式：
+### 704. Binary Search， 经典BS
+```java
+class Solution {
+    public int search(int[] nums, int target) {
+        int l = 0, h = nums.length - 1;
+        while (l <= h) {
+            int mid = (l + h) / 2;
+            if (nums[mid] == target) return mid;
+            
+            if (nums[mid] < target) {
+                l = mid + 1;
+            }
+            else {
+                h = mid - 1;
+            }
+        }
+        return - 1;
+    }
+}
+```
+### 852. Peak Index in a Mountain Array 数组的山峰，涉及答案以及答案左边两个元素
+```java
+class Solution {
+    public int peakIndexInMountainArray(int[] arr) {
+        int l = 0, h = arr.length - 1;
+        while (l < h) {
+            int mid = (l + h) / 2;
+            if (arr[mid - 1] < arr[mid]) {
+                l = mid + 1; 
+            }
+            else {
+                h = mid;
+            }
+        }
+        return l - 1;
+    }
+}
+```
