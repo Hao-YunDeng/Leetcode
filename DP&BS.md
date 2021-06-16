@@ -390,3 +390,35 @@ class Solution {
     }
 }
 ```
+### 153. Find Minimum in Rotated Sorted Array
+```java
+class Solution {
+    public int findMin(int[] nums) {
+        int l = 0, h = nums.length - 1; 
+        
+        while (l < h) {
+            int mid = l + (h - l) / 2;
+            if (nums[mid] > nums[h]) {
+                l = mid + 1;
+            }
+            else {
+                h = mid;
+            }
+        }
+        return nums[l];
+        
+        //The following is wrong for [4, 5, 6, 7, 0, 1, 2]
+        
+        // while (l < h) {
+        //     int mid = l + (h - l) / 2;
+        //     if (nums[mid] <= nums[l]) {
+        //         h = mid;
+        //     }
+        //     else {
+        //         l = mid + 1;
+        //     }
+        // }
+        // return nums[l];
+    }
+}
+```
