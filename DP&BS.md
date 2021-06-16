@@ -408,6 +408,8 @@ class Solution {
         return nums[l];
         
         //The following is wrong for [4, 5, 6, 7, 0, 1, 2]
+        //because it falls into eles statement and
+        //keep moving right, while we are looking for smallest.
         
         // while (l < h) {
         //     int mid = l + (h - l) / 2;
