@@ -83,8 +83,7 @@ class Solution {
                         
                         if (!visited.contains(newWord) && words.contains(newWord)) {
                             q.add(newWord);
-                            visited.add(newWord);
-                            
+                            visited.add(newWord);                          
                         }
                     }
                     chars[i] = originalChar;
