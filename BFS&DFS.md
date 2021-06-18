@@ -1,3 +1,46 @@
+### 1091. Shortest Path in Binary Matrix
+```java
+class Solution {
+    public int shortestPathBinaryMatrix(int[][] grid) {
+        if (grid[0][0] == 1) return -1;
+        int n = grid.length;
+        Queue<int[]> q = new LinkedList<>();
+        q.offer(new int[] {0, 0});
+        int step = 0;
+        while (!q.isEmpty()) {
+            step++;
+            int size = q.size();
+            while (size-- > 0) {
+                int[] v = q.poll();
+                int x = v[0], y = v[1];
+                if (grid[x][y] == 1) {
+                    continue;
+                }
+                if (x == n - 1 && y == n - 1) {
+                    return step;
+                }
+                for (int i = -1; i <= 1 ; i++) {
+                    for (int j = -1; j <= 1; j++) {
+                        if (i == 0 && j == 0) {
+                            continue;
+                        }
+                        int newX = x + i, newY = y + j;
+                        if (newX > n - 1 || newX < 0 || newY > n - 1 || newY < 0) {
+                            continue;
+                        }
+                        if (grid[newX][newY] == 1) {
+                            continue;
+                        }
+                        q.offer(new int[] {newX, newY});
+                    }
+                }
+                grid[x][y] = 1;                
+            }          
+        }
+        return -1;
+    }
+}
+```
 ### 127. Word Ladder
 ```java
 class Solution {
