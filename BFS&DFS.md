@@ -168,9 +168,7 @@ class Solution {
             if (!visited[i]) {
                 dfs(isConnected, i, visited);
                 cc++;
-            }
-                
-            
+            }                            
         }
         return cc;
     }
