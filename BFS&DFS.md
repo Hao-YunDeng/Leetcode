@@ -235,3 +235,52 @@ class Solution {
     }
 }
 ```
+### 417. Pacific Atlantic Water Flow
+```java
+class Solution {
+    public List<List<Integer>> pacificAtlantic(int[][] heights) {
+        int m = heights.length;
+        int n = heights[0].length;
+        boolean[][] canReachP = new boolean[m][n];
+        boolean[][] canReachA = new boolean[m][n];
+        
+        for (int i = 0; i < m; i++) {
+            dfs(heights, i, 0, canReachP);
+            dfs(heights, i, n - 1, canReachA);
+        }
+        for (int i = 0; i < n; i++) {
+            dfs(heights, 0, i, canReachP);
+            dfs(heights, m - 1, i, canReachA);
+        }
+        List<List<Integer>> res = new ArrayList<>();
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (canReachP[i][j] && canReachA[i][j]) {
+                    res.add(Arrays.asList(i, j));
+                }
+            }
+        }
+        return res;
+    }
+    
+    public void dfs(int[][] heights, int x, int y, boolean[][] canReach) {
+        int m = heights.length;
+        int n = heights[0].length;
+        if (canReach[x][y]) {
+            return;
+        }        
+        canReach[x][y] = true;
+        int[] dx = new int[] {1, -1, 0, 0};
+        int[] dy = new int[] {0, 0, 1, -1};
+        for (int i = 0; i < dx.length; i++) {
+            if (x + dx[i] < 0 || x + dx[i] > m - 1 || y + dy[i] < 0 || y + dy[i] > n - 1) {
+                continue;
+            }
+            if (heights[x][y] <= heights[x + dx[i]][y + dy[i]]) {
+                dfs(heights, x + dx[i], y + dy[i], canReach);
+            }
+        }
+        return;
+    }
+}
+```
