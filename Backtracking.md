@@ -28,3 +28,42 @@ class Solution {
     }
 }
 ```
+### 93. Restore IP Addresses
+```java
+class Solution {
+    public List<String> restoreIpAddresses(String s) {
+        List<String> res = new ArrayList<>();
+        StringBuilder temp = new StringBuilder();
+        backtracking(s, 0, temp, res);
+        return res;        
+    }
+    
+    public void backtracking(String s, int k, StringBuilder temp, List<String> res) {
+        if (s.length() == 0 || k == 4) {
+            if (s.length() == 0 && k == 4) {//4 parts in IP
+                res.add(temp.toString());
+            }
+            return;
+        }
+        for (int i = 1; i <= 3 && i <= s.length(); i++) {//i is len, so <=, not just <!
+            //each part can be 1, 2, 3 digits long. i for length
+            if (i != 1 && s.charAt(0) == '0')  {
+                //length of this part is not 1 but there's a leading 0, illegal
+                break;
+                //not just continue, because later i would work either
+            }
+            int len = temp.length();
+            String part = s.substring(0, i);
+            if (Integer.valueOf(part) <= 255) {
+                if (len != 0) {
+                    part = "." + part;
+                }
+                temp.append(part);
+                backtracking(s.substring(i), k + 1, temp, res);
+                temp.setLength(len);
+            }
+        }
+        //return;
+    }
+}
+```
