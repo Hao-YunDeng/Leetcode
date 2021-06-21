@@ -67,3 +67,49 @@ class Solution {
     }
 }
 ```
+### 79. Word Search
+class Solution {
+    public boolean exist(char[][] board, String word) {
+        int m = board.length;
+        int n = board[0].length;
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+                if (dfs(board, i, j, word, 0)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    public boolean dfs(char[][] board, int x, int y, String word, int index) {
+        char c = board[x][y];
+        if (c != word.charAt(index)) {
+            return false;
+        }
+        if (index == word.length() - 1) {
+            return c == word.charAt(index);
+        }
+        
+        int[] dx = {1, -1, 0, 0};
+        int[] dy = {0, 0, 1, -1};
+        board[x][y] = '#';
+        int m = board.length;
+        int n = board[0].length;
+        for (int i = 0; i < dx.length; i++) {
+            int newX = x + dx[i];
+            int newY = y + dy[i];
+            if (newX >= 0 && newX < m && newY >= 0 && newY < n) {
+                if (board[newX][newY] == '#') {
+                    continue;
+                }
+                if(dfs(board, newX, newY, word, index + 1)) {
+                    //search from next to the (possibly) end
+                    return true;
+                }
+            }
+        }
+        board[x][y] = c;
+        return false;
+    }
+}
+```
