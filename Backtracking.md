@@ -150,3 +150,48 @@ class Solution {
     
 }
 ```
+### 46. Permutations
+```java
+class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        boolean[] visited = new boolean[nums.length];
+        List<Integer> temp = new ArrayList<>();
+        backtracking(nums, visited, temp, res);
+        return res;
+    }
+    
+    public void backtracking(int[] nums, boolean[] visited, List<Integer> temp, List<List<Integer>> res) {
+        if (temp.size() >= nums.length) {
+            res.add(new ArrayList<>(temp));
+            //The below line will finally make all added temps's be []!
+            //That's because the final temp when getting out of all recursions
+            //will be empty!
+            
+            //res.add(temp);
+            return;
+        }
+        
+        for (int i = 0; i < nums.length; i++) {            
+            // if (visited[i]) {
+            //     continue;
+            // }            
+            // visited[i] = true;
+            // temp.add(nums[i]);
+            // backtracking(nums, visited, temp, res);
+            // temp.remove(temp.size() - 1); 
+            // visited[i] = false;
+            
+            if (!visited[i]) {
+                visited[i] = true;
+                temp.add(nums[i]);
+                backtracking(nums, visited, temp, res);
+                //it will be wrong if the next two lines 
+                //are out of the if statement
+                temp.remove(temp.size() - 1); 
+                visited[i] = false;
+            }                        
+        }
+    }
+}
+```
