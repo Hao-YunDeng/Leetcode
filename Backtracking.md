@@ -114,3 +114,39 @@ class Solution {
     }
 }
 ```
+### 257. Binary Tree Paths
+```java
+class Solution {
+    public List<String> binaryTreePaths(TreeNode root) {
+        List<String> res = new ArrayList<>();
+        StringBuilder temp = new StringBuilder();
+        dfs(root, temp, res);
+        return res;
+    }
+    public void dfs(TreeNode root, StringBuilder temp, List<String> res) {
+        if (root == null) return;
+        
+        //add the current one
+        int len = temp.length();        
+        if (len == 0) {
+            temp.append(Integer.toString(root.val));
+            len = temp.length();
+        }
+        else {
+            temp.append("->" + root.val);
+            len = temp.length();
+        }
+        //if the curr is an end, add this as a path and return 
+        if (root.left == null && root.right == null) {
+            res.add(temp.toString());
+            return;
+        }  
+        
+        dfs(root.left, temp, res);
+        temp.setLength(len);
+        dfs(root.right, temp, res);
+        //temp.setLength(len);                
+    }
+    
+}
+```
