@@ -195,3 +195,46 @@ class Solution {
     }
 }
 ```
+### 47. Permutations II
+```java
+class Solution {
+    public List<List<Integer>> permuteUnique(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        boolean[] visited = new boolean[nums.length];
+        List<Integer> temp = new ArrayList<>();
+        
+        Arrays.sort(nums);
+        
+        backtracking(nums, visited, temp, res);
+        return res;
+    }
+    
+    public void backtracking(int[] nums, boolean[] visited, List<Integer> temp, List<List<Integer>> res) {
+        if (temp.size() >= nums.length) {
+            res.add(new ArrayList<>(temp));
+            return;
+        }
+        
+        for (int i = 0; i < nums.length; i++) {            
+            if (visited[i]) {
+                continue;
+            } 
+            
+            if (i > 0 && nums[i] == nums[i - 1] && !visited[i - 1]) {
+                //if i and i - 1 are same, and when i - 1 hasn't 
+                //been placed, you can't place i. In this way, 
+                //equal elements have to be placed in order. 
+                //Thus it removes repeatition
+                continue;
+            }
+            
+            visited[i] = true;
+            temp.add(nums[i]);
+            backtracking(nums, visited, temp, res);
+            temp.remove(temp.size() - 1); 
+            visited[i] = false;
+                                   
+        }
+    }
+}
+```
