@@ -238,3 +238,84 @@ class Solution {
     }
 }
 ```
+### 77. Combinations
+```java
+class Solution {
+    public List<List<Integer>> combine(int n, int k) {
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> temp = new ArrayList<>();
+        backtracking(n, k, temp, res, 1);
+        return res;
+    }
+    public void backtracking(int n, int k, List<Integer> temp, List<List<Integer>> res, int currStart) {
+        if (temp.size() == k) {
+            res.add(new ArrayList<>(temp));
+            return;
+        }
+        
+        for (int i = currStart; i <= n; i++) {
+            temp.add(i);
+            backtracking(n, k, temp, res, i + 1);
+            temp.remove(temp.size() - 1);
+        }
+    }
+}
+```
+### 39. Combination Sum
+```java
+class Solution {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> temp = new ArrayList<>();
+        backtracking(candidates, target, temp, res, 0);
+        return res;
+    }
+    public void backtracking(int[] candidates, int target, List<Integer> temp, List<List<Integer>> res, int index) {
+        if (target == 0) {
+            res.add(new ArrayList<>(temp));
+            return;
+        }
+        
+        for (int i = index; i < candidates.length; i++) {
+            if (candidates[i] > target) {
+                continue;
+            }
+            temp.add(candidates[i]);
+            backtracking(candidates, target - candidates[i], temp, res, i);
+            temp.remove(temp.size() - 1);
+        }
+    }
+}
+```
+### 40. Combination Sum II
+```java
+class Solution {
+    public List<List<Integer>> combinationSum2(int[] candidates, int target) {
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> temp = new ArrayList<>();
+        boolean[] visited = new boolean[candidates.length];
+        Arrays.sort(candidates);
+        backtracking(candidates, target, temp, res, 0, visited);
+        return res;
+    }
+    public void backtracking(int[] candidates, int target, List<Integer> temp, List<List<Integer>> res, int index, boolean[] visited) {
+        if (target == 0) {
+            res.add(new ArrayList<>(temp));
+            return;
+        }
+        for (int i = index; i < candidates.length; i++) {
+            if (candidates[i] > target) {
+                continue;
+            }
+            if (i > 0 && candidates[i] == candidates[i - 1] && !visited[i - 1]) {
+                continue;
+            }
+            visited[i] = true;
+            temp.add(candidates[i]);
+            backtracking(candidates, target - candidates[i], temp, res, i + 1, visited);
+            temp.remove(temp.size() - 1);
+            visited[i] = false;
+        }
+    }
+}
+```
