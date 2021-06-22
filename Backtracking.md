@@ -319,3 +319,30 @@ class Solution {
     }
 }
 ```
+### 216. Combination Sum III
+```java
+class Solution {
+    public List<List<Integer>> combinationSum3(int k, int n) {
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> temp = new ArrayList<>();
+        backtracking(k, n, temp, res, 1);
+        return res;
+    }
+    public void backtracking(int k, int n, List<Integer> temp, List<List<Integer>> res, int currStart) {
+        if (k == 0 || n == 0) {
+            if (k ==0 && n == 0) {
+                res.add(new ArrayList<>(temp));
+            }            
+            return;
+        }
+        for (int i = currStart; i <= 9; i++) {
+            if (i > n) {
+                continue;
+            }
+            temp.add(i);
+            backtracking(k - 1, n - i, temp, res, i + 1);
+            temp.remove(temp.size() - 1);
+        }
+    }
+}
+```
