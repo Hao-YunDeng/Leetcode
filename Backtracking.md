@@ -346,3 +346,61 @@ class Solution {
     }
 }
 ```
+### 78. Subsets
+```java
+class Solution {
+    public List<List<Integer>> subsets(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> temp = new ArrayList<>();
+        for (int i = 0; i <= nums.length; i++) {
+            backtracking(nums, temp, res, 0, i);
+        }       
+        return res;
+    }
+    public void backtracking(int[] nums, List<Integer> temp, List<List<Integer>> res, int index, int size) {
+        if (size == 0) {
+            res.add(new ArrayList<>(temp));
+            return;
+        }
+        
+        for (int i = index; i < nums.length; i++) {
+            temp.add(nums[i]);
+            backtracking(nums, temp, res, i + 1, size - 1);
+            temp.remove(temp.size() - 1);
+        }
+    }
+}
+```
+### 90. Subsets II
+```java
+class Solution {
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        List<List<Integer>> res = new ArrayList<>();
+        List<Integer> temp = new ArrayList<>();
+        boolean[] visited = new boolean[nums.length];
+        Arrays.sort(nums);
+        for (int i = 0; i <= nums.length; i++) {
+            backtracking(nums, temp, res, 0, i, visited);
+        }       
+        return res; 
+    }
+    
+    public void backtracking(int[] nums, List<Integer> temp, List<List<Integer>> res, int index, int size, boolean[] visited) {
+        if (size == 0) {
+            res.add(new ArrayList<>(temp));
+            return;
+        }
+        
+        for (int i = index; i < nums.length; i++) {
+            if (i > 0 && nums[i - 1] == nums[i] && !visited[i - 1]) {
+                continue;
+            }
+            temp.add(nums[i]);
+            visited[i] = true;
+            backtracking(nums, temp, res, i + 1, size - 1, visited);
+            temp.remove(temp.size() - 1);
+            visited[i] = false;
+        }
+    }
+}
+```
