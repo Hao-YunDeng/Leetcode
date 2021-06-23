@@ -404,3 +404,38 @@ class Solution {
     }
 }
 ```
+### 131. Palindrome Partitioning
+```java
+class Solution {
+    public List<List<String>> partition(String s) {
+        List<List<String>> res = new ArrayList<>();
+        List<String> temp = new ArrayList<>();
+        backtracking(s, temp, res, 0);
+        return res;
+    }
+    public void backtracking(String s, List<String> temp, List<List<String>> res, int index) {
+        if (index == s.length()) {
+            res.add(new ArrayList<>(temp));
+            return;
+        }
+        for (int i = index + 1; i <= s.length(); i++) {
+            if (isPalindrome(s.substring(index, i))) {
+                temp.add(s.substring(index, i));
+                backtracking(s, temp, res, i);
+                temp.remove(temp.size() - 1);
+            }
+        }
+    }
+    public boolean isPalindrome(String s) {
+        int l = 0, r = s.length() - 1;
+        while (l < r) {
+            if (s.charAt(l) != s.charAt(r)) {
+                return false;
+            }
+            l++;
+            r--;
+        }
+        return true;
+    }
+}
+```
