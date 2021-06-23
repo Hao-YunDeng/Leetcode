@@ -439,3 +439,51 @@ class Solution {
     }
 }
 ```
+### 37. Sudoku Solver
+```java
+class Solution {
+    public void solveSudoku(char[][] board) {
+        int[][] row = new int[9][10];
+        int[][] col = new int[9][10];
+        int[][] box = new int[9][10];
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (board[i][j] == '.') {
+                    continue;
+                }
+                int n = board[i][j] - '0';                
+                row[i][n] = 1;
+                col[j][n] = 1;
+                box[(j / 3) * 3 + i / 3][n] = 1;
+            }
+        }
+        fill(board, row, col, box, 0, 0);        
+    }
+    public boolean fill(char[][] board, int[][] row, int[][] col, int[][] box, int i, int j) {
+        if (j == 9) {
+            return true;
+        }
+        int ni = (i + 1) % 9;
+        int nj = (ni == 0) ? j + 1 : j;
+        
+        if (board[i][j] != '.') {
+            return fill(board, row, col, box, ni, nj); 
+        }
+        
+        for (int k = 1; k <= 9; k++) {
+            if (row[i][k] == 0 && col[j][k] == 0 && box[(j / 3) * 3 + i / 3][k] == 0) {
+                board[i][j] = (char)(k + '0');
+                row[i][k] = 1;
+                col[j][k] = 1;
+                box[(j / 3) * 3 + i / 3][k] = 1;
+                if (fill(board, row, col, box, ni, nj)) return true;
+                board[i][j] = '.';
+                row[i][k] = 0;
+                col[j][k] = 0;
+                box[(j / 3) * 3 + i / 3][k] = 0;
+            }
+        }
+        return false;
+    }
+}
+```
