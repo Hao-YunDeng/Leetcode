@@ -487,3 +487,60 @@ class Solution {
     }
 }
 ```
+### 51. N-Queens
+```java
+class Solution {
+    public List<List<String>> res;
+    boolean[] col;
+    boolean[] diag;
+    boolean[] antiDiag;
+    boolean[][] board;
+    public List<List<String>> solveNQueens(int n) {
+        res = new ArrayList<>();
+        col = new boolean[n];
+        diag = new boolean[2 * n];
+        antiDiag = new boolean[2 * n];
+        board = new boolean[n][n];
+        backtracking(n, 0);
+        return res;
+    }
+    public void backtracking(int n, int i) {
+        if (i == n) {
+            generateRes(n);
+            return;
+        }
+        for (int j = 0; j < n; j++) {
+            if (col[j] || diag[i - j + n] || antiDiag[i + j]) {
+                continue;
+            }
+            board[i][j] = true;
+            col[j] = true;
+            diag[i - j + n] = true;
+            antiDiag[i + j] = true;
+            
+            backtracking(n, i + 1);
+            
+            board[i][j] = false;
+            col[j] = false;
+            diag[i - j + n] = false;
+            antiDiag[i + j] = false;
+        }
+    }
+    public void generateRes(int n) {
+        List<String> list = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            StringBuilder sb = new StringBuilder();
+            for (int j = 0; j < n; j++) {
+                if (board[i][j]) {
+                    sb.append("Q");
+                }
+                else {
+                    sb.append(".");
+                }
+            }
+            list.add(sb.toString());
+        }
+        res.add(list);
+    }
+}
+```
