@@ -72,3 +72,56 @@ class Solution {
     }
 }
 ```
+### 392. Is Subsequence
+```java
+class Solution {
+    public boolean isSubsequence(String s, String t) {
+        int len1 = s.length();
+        int len2 = t.length();
+        int up = 0;
+        int down = 0;
+        while (up < len1 && down < len2) {
+            if (s.charAt(up) == t.charAt(down)) {
+                up++;
+                down++;
+            }
+            else {
+                down++;
+            }
+        }
+        return up == len1;
+    }
+}
+```
+### 665. Non-decreasing Array
+```java
+class Solution {
+    public boolean checkPossibility(int[] nums) {
+        int n = nums.length;
+        if (n <= 2) return true;
+        boolean modified = false;
+        if (nums[1] < nums[0]) {
+            nums[0] = nums[1];
+            modified = true;
+        }
+        
+        for (int i = 2; i < n; i++) {
+            if (nums[i] < nums[i - 1]) {
+                if (modified) {
+                    return false;
+                }
+                
+                if (nums[i] >= nums[i - 2]) {
+                    nums[i - 1] = nums[i - 2];
+                    modified = true;
+                }
+                else {
+                    nums[i] = nums[i - 1];
+                    modified = true;
+                }
+            }
+        }
+        return true;
+    }
+}
+```
