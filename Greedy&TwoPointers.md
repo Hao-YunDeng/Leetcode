@@ -173,3 +173,40 @@ class Solution {
     }
 }
 ```
+### 88. Merge Sorted Array
+```java
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        int i = m - 1, j =  n - 1, k = m + n - 1;
+        while (i >= 0 && j >= 0) {
+            if (nums1[i] >= nums2[j]) {
+                nums1[k--] = nums1[i--];
+            }
+            else {
+                nums1[k--] = nums2[j--];
+            }
+        }
+        while (j >= 0) {
+            nums1[k--] = nums2[j--];
+        }
+    }
+}
+```
+### 141. Linked List Cycle
+```java
+public class Solution {
+    public boolean hasCycle(ListNode head) {
+        if (head == null) return false;
+        ListNode p = head;
+        ListNode q = head;
+        while (p.next != null && q.next != null && q.next.next != null) {
+            p = p.next;
+            q = q.next.next;
+            if (p == q) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+```
