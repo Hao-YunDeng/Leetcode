@@ -151,3 +151,25 @@ class Solution {
     }
 }
 ```
+### 633. Sum of Square Numbers
+```java
+class Solution {
+    public boolean judgeSquareSum(int c) {
+        int small = 0;
+        int big = (int)Math.sqrt(c);
+        while (small <= big) {
+            int squareSum = small * small + big * big;
+            if (squareSum == c) {
+                return true;
+            }
+            if (squareSum < c) {
+                small++;
+            }
+            else {
+                big--;
+            }
+        }
+        return false;
+    }
+}
+```
