@@ -125,3 +125,29 @@ class Solution {
     }
 }
 ```
+### 763. Partition Labels
+```java
+class Solution {
+    public List<Integer> partitionLabels(String s) {
+        int[] lastOcur = new int[26];        
+        //Arrays.fill(lastOcur, -1); //useless but doesn't hurt time
+        
+        List<Integer> res = new ArrayList<>();
+        
+        for (int i = 0; i < s.length(); i++) {
+            lastOcur[s.charAt(i) - 'a'] = i;
+        }
+        
+        int start = 0;
+        int end = 0;
+        for (int i = 0; i < s.length(); i++) {
+            end = Math.max(end, lastOcur[s.charAt(i) - 'a']);
+            if (i == end) {
+                res.add(end - start + 1);
+                start = end + 1;
+            }
+        }
+        return res;
+    }
+}
+```
