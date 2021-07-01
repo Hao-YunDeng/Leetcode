@@ -141,3 +141,31 @@ class Solution {
     }
 }
 ```
+### 95. Unique Binary Search Trees II
+```java
+class Solution {
+    public List<TreeNode> generateTrees(int n) {
+        return helper (1, n);
+    }
+    public List<TreeNode> helper(int l, int r) {
+        List<TreeNode> res = new ArrayList<>();
+        if (l > r) {
+            res.add(null);
+            return res;
+        }
+        for (int i = l; i <= r; i++) {            
+            List<TreeNode> leftChildren = helper(l, i - 1);
+            List<TreeNode> rightChildren = helper(i + 1, r);
+            for (TreeNode left : leftChildren) {
+                for (TreeNode right : rightChildren) {
+                    TreeNode root = new TreeNode(i);
+                    root.left = left;
+                    root.right = right;
+                    res.add(root);
+                }
+            }
+        }
+        return res;
+    }
+}
+```
