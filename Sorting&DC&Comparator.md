@@ -170,6 +170,7 @@ class Solution {
 }
 ```
 ### 252. Meeting Rooms
+```java
 class Solution {
     public boolean canAttendMeetings(int[][] intervals) {
         if (intervals.length <= 1) return true;
