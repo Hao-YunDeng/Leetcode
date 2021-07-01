@@ -169,3 +169,61 @@ class Solution {
     }
 }
 ```
+### 252. Meeting Rooms
+class Solution {
+    public boolean canAttendMeetings(int[][] intervals) {
+        if (intervals.length <= 1) return true;
+        
+        Arrays.sort(intervals, new Comparator<int[]>() {
+            @Override
+            public int compare(int[] a, int[] b) {
+                return a[0] - b[0];
+            }
+        });
+        for (int i = 1; i < intervals.length; i++) {
+            if (intervals[i][0] < intervals[i - 1][1]) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+```
+### 253. Meeting Rooms II
+```java
+class Solution {
+    public int minMeetingRooms(int[][] intervals) {
+        int[] start = new int[intervals.length];
+        int[] end = new int[intervals.length];
+        for (int i = 0; i < intervals.length; i++) {
+            start[i] = intervals[i][0];
+            end[i] = intervals[i][1];
+        }
+        Arrays.sort(start);
+        Arrays.sort(end);
+        int count = 0;
+        int p1 = 0, p2 = 0;
+        
+        //General idea: meeting comes in at start times one by one
+        //You always look at the earliest ending time when new meeting comes in
+        //when noe over, open a new room and fit it in
+        //when over, fit the meeting in and move to the next earliest ending time
+
+        for (; p1 < intervals.length; p1++) {
+            if (end[p2] > start[p1]) {
+                //Meeting not over, cannot release a room
+                //Have to open new for 
+                //all coming meetings and hold p2
+                count++;
+            }
+            else {
+                //Meeting over, no need for a new room
+                //and the curr start time fits in
+                //Now look at the next earliest ending time
+                p2++;
+            }
+        }
+        return count;
+    }
+}
+```
